@@ -12,16 +12,18 @@ class ApplicationController < ActionController::API
 		rescue JWT::DecodeError	=> e
 			render json: { error: 'Invalid token' }, status: :unprocessable_entity
 		end
-		
-    rescue ActiveRecord::RecordNotFound
-      render json: "No record found.."
 	end
 	
 	def current_user
 		@current_user
 	end
 
-  def check_administrator
+  	def check_administrator
 		return render json: { message: "You don't have access to perform this action. Please contact to your administrator" } unless @current_user.type == 'Administrator'
 	end
+
+	rescue_from ActiveRecord::RecordNotFound, with: :handle_exception
+	def handle_exception
+		render json: { error: 'Wrong input!!!' }
+	end	
 end
