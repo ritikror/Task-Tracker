@@ -26,14 +26,14 @@ class TasksController < ApplicationController
   end
 
   def update
-    if @current_user.task.update(task_params)
+    if @task.update(task_params)
       render json: "Task successfully updated"      
     else
       render json: {message: "something went wrong!!", errors: @current_user.errors.full_messages }
     end
   end
 
-  def def destroy
+  def destroy
     if @task 
       @task.destroy
       render json: "Task successfully deleted!!"      
@@ -43,7 +43,7 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.permit(:title, :description, :time, :assign_to, :status)
+    params.require(:task).permit(:title, :description, :assign_to, :status)
   end
 
   def set_params

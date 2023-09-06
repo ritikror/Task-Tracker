@@ -3,9 +3,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.0.0"
 
-gem 'timers', '~> 4.1', '>= 4.1.1'
+gem 'timeout', '~> 0.4.0'
 
 gem 'mail'
+
+gem "active_model_serializers"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.7", ">= 7.0.7.2"

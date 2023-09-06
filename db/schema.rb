@@ -14,7 +14,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_104039) do
   create_table "tasks", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.integer "time"
     t.integer "assign_to"
     t.string "status"
     t.integer "user_id", null: false
@@ -24,7 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_104039) do
   end
 
   create_table "timers", force: :cascade do |t|
-    t.string "countdown"
+    t.integer "time_in_minute"
     t.integer "user_id", null: false
     t.integer "task_id", null: false
     t.datetime "created_at", null: false

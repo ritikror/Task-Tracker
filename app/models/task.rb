@@ -1,7 +1,8 @@
 class Task < ApplicationRecord
   belongs_to :user
+  has_one :timer, dependent: :destroy
 
-  validates :title, :assign_to, :time, presence: true
+  validates :title, :assign_to,  presence: true
   validates :status ,presence:true, inclusion: { in: %w(working complete) } 
   validate :administrator_only_create_task
 
