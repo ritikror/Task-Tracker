@@ -192,6 +192,7 @@ GEM
     stringio (3.0.8)
     thor (1.2.2)
     timeout (0.4.0)
+    timers (4.3.5)
     turbo-rails (1.4.0)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
@@ -226,12 +227,14 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   jwt
+  mail
   puma (~> 5.0)
   rails (~> 7.0.7, >= 7.0.7.2)
   selenium-webdriver
   sprockets-rails
   sqlite3 (~> 1.4)
   stimulus-rails
+  timers (~> 4.1, >= 4.1.1)
   turbo-rails
   tzinfo-data
   web-console

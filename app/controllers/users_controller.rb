@@ -7,11 +7,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(user_params)
-    if user.save    
-        render json: { message:"User Created!!!", data: user }
+    @user = User.new(user_params)
+    if @user.save
+      UserMailer.with(user: @user).welcome_email.deliver_later  
+      render json: { message:"User Created!!!", data: @user }
     else
-        render json: user.errors.full_messages, status: :unprocessable_entity
+      render json: user.errors.full_messages, status: :unprocessable_entity
     end
   end
 
