@@ -19,7 +19,8 @@ class TasksController < ApplicationController
   def create
     task = @current_user.tasks.new(task_params)
     if task.save
-      render json: "Task successfully created"      
+      render json: "Task successfully created"  
+      TaskMailer.with(task: task).task_assigned.deliver_later    
     else
       render json: {message: "something went wrong!!", errors: @current_user.errors.full_messages }
     end
