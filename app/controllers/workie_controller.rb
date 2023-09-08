@@ -1,2 +1,0 @@
-class WorkieController < ApplicationController
-end

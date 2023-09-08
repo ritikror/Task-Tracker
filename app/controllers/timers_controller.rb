@@ -48,7 +48,7 @@ class TimersController < ApplicationController
       task = task.update(status:"complete")
       if task
         render json: {message: "Task time is completed"}
-        TimerMailer.with(timer: @timer).timer_complete.deliver_later 
+        TimerMailer.with(timer: @timer).timer_complete.deliver_now 
       else
         render json: "something went wrong!!!"
       end

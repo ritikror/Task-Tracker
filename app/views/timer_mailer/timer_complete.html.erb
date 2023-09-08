@@ -3,7 +3,7 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <p>Hii <%= @user.name %></P>
+    <p>Hii <%= @user.name? ? @user.name : "Workie..." %></P>
 
     <h4>Task status updated</h4> <br>
 

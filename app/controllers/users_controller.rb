@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      UserMailer.with(user: @user).welcome_email.deliver_later
+      # UserMailer.with(user: @user).welcome_email.deliver_now
       render json: { message:"User Created!!!", data: @user }
     else
       render json: @user.errors.full_messages, status: :unprocessable_entity
@@ -25,7 +25,8 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if @current_user.destroy
+    user = User.find(params[:id])
+    if user.destroy
       render json: { message: 'User deleted' }
     else
       render json: { errors: @current_user.errors.full_messages }
