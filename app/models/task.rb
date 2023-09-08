@@ -1,6 +1,7 @@
 class Task < ApplicationRecord
   belongs_to :user
   has_one :timer, dependent: :destroy
+  accepts_nested_attributes_for :timer
 
   validates :title, :assign_to,  presence: true
   validates :status ,presence:true, inclusion: { in: %w(working complete) } 

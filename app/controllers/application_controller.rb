@@ -30,6 +30,6 @@ class ApplicationController < ActionController::API
 
 	rescue_from ActiveRecord::RecordNotFound, with: :handle_exception
 	def handle_exception
-		render json: { error: 'Wrong input!!!' }
+		render json: { error: 'No record found..!!!' }
 	end	
 end

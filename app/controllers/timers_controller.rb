@@ -12,15 +12,14 @@ class TimersController < ApplicationController
     render json: @timer
   end
 
-
-  def create
-    timer= Timer.new(timer_params)
-    if timer.save
-      render json: {message: "Timer successfully created", Timer: timer}     
-    else
-      render json: {message: "something went wrong!!", errors: timer.errors.full_messages }
-    end
-  end
+  # def create
+  #   timer= Timer.new(timer_params)
+  #   if timer.save
+  #     render json: {message: "Timer successfully created", Timer: timer}     
+  #   else
+  #     render json: {message: "something went wrong!!", errors: timer.errors.full_messages }
+  #   end
+  # end
 
   def update
     if @timer.update(timer_params)
