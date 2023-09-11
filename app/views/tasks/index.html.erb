@@ -8,7 +8,20 @@
       <strong>Task:</strong>
       <%= link_to task.title, task %>
     </p>
-    <%= render task %>
+    <p>
+    <strong>Description:</strong>
+    <%= task.description %>
+  </p>
+
+  <p>
+    <strong>Assign_to:</strong>
+    <%= task.assign_to %>
+  </p>
+
+  <p>
+    <strong>Status:</strong>
+    <%= task.status %>
+  </p>  
     <hr>
   <% end %>
 </div>
