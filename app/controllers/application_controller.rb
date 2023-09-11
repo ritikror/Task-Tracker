@@ -1,6 +1,7 @@
-class ApplicationController < ActionController::API
+class ApplicationController < ActionController::Base
   include JsonWebToken
-  before_action :authenticate_request
+#   before_action :authenticate_request
+	skip_forgery_protection
 
   private
 	def authenticate_request
@@ -13,10 +14,6 @@ class ApplicationController < ActionController::API
 			render json: { error: 'Invalid token' }, status: :unprocessable_entity
 		end
 	end
-	
-	def current_user
-		@current_user
-	end
 
   	def check_administrator
 		return render json: { message: "You don't have access to perform this action. Please contact to your administrator" } unless @current_user.type == 'Administrator'
@@ -24,9 +21,7 @@ class ApplicationController < ActionController::API
 	
 	def check_workie
 		return render json: { message: "Hey this action is reserved for Workie only!!!!" } unless @current_user.type == 'Workie'
-	end
-
-	
+	end	
 
 	rescue_from ActiveRecord::RecordNotFound, with: :handle_exception
 	def handle_exception

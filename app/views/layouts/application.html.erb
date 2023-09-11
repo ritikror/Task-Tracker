@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>TaskTracker</title>
+    <title>Task Tracker</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-
   <body>
+    <div style="background-color: #007BFF; padding: 10px;">
+      <p style="color: #fff; font-size: 14px; margin: 0;">Task Tracker</p>
+    </div>
     <%= yield %>
+    <br>
+    <div style="background-color: #007BFF; padding: 10px; text-align: center;">
+      <p style="color: #fff; font-size: 14px; margin: 0;">&copy; 2023 Task Tracker</p>
+    </div>
   </body>
 </html>

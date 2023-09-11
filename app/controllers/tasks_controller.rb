@@ -3,17 +3,18 @@ class TasksController < ApplicationController
   before_action :check_administrator, except: [:index, :show]
 
   def index
-    if @current_user.type == "Administrator"
-      tasks = @current_user.tasks
-      render json: tasks
-    else
-      assign_tasks = Task.where(assign_to:@current_user.id)
-      render json: assign_tasks
-    end
+    # if @current_user.type == "Administrator"
+      # tasks = @current_user.tasks
+      @tasks = Task.all
+      # render json: tasks
+    # else
+    #   assign_tasks = Task.where(assign_to:@current_user.id)
+    #   render json: assign_tasks
+    # end
   end
 
   def show
-    render json: @task
+    # render json: @task
   end
 
   def create
@@ -48,11 +49,12 @@ class TasksController < ApplicationController
   end
 
   def set_params
-    if @current_user.type == "Administrator"
-      @task = @current_user.tasks.find(params[:id])
-    else
-      assign_task = Task.where(assign_to:@current_user.id)
-      @task = assign_task.find(params[:id])
-    end
+    @task = Task.find(params[:id])
+    # if @current_user.type == "Administrator"
+    #   @task = @current_user.tasks.find(params[:id])
+    # else
+    #   assign_task = Task.where(assign_to:@current_user.id)
+    #   @task = assign_task.find(params[:id])
+    # end
   end
 end

@@ -38,21 +38,25 @@ class TimersController < ApplicationController
 
   def start_timer
     task = Task.find(@timer.task_id)
-    if task.status != "complete"
-      t = @timer.time_in_minute 
-      t.times do | i | 
-        puts"Timer is running....#{i} second"
-        sleep(1)
-      end 
-      task = task.update(status:"complete")
-      if task
-        render json: {message: "Task time is completed"}
-        TimerMailer.with(timer: @timer).timer_complete.deliver_now 
+    if task.assign_to == @current_user.id
+      if task.status != "complete"
+        t = @timer.time_in_minute 
+        t.times do | i | 
+          puts"Timer is running....#{i} second"
+          sleep(1)
+        end 
+        task = task.update(status:"complete")
+        if task
+          render json: {message: "Task time is completed"}
+          TimerMailer.with(timer: @timer).timer_complete.deliver_now 
+        else
+          render json: "something went wrong!!!"
+        end
       else
-        render json: "something went wrong!!!"
+        render json: "Task time is already ended"
       end
     else
-      render json: "Task time is already ended"
+      render json: {message: User.find(task.assign_to).name + " can only start the timer!!"}
     end
   end
 

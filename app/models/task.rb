@@ -4,7 +4,7 @@ class Task < ApplicationRecord
   accepts_nested_attributes_for :timer
 
   validates :title, :assign_to,  presence: true
-  validates :status ,presence:true, inclusion: { in: %w(working complete) } 
+  validates :status ,presence:true, inclusion: { in: %w(pending complete) } 
   validate :administrator_only_create_task
 
   def administrator_only_create_task
