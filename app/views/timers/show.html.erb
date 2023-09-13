@@ -8,7 +8,10 @@
     <%= User.find(@timer.user_id).name %>
   </p>
 
+  <%= link_to "Start Timer"  %> 
+
 <div>
+
   <%= link_to "Edit this timer", edit_timer_path(@timer) %> |
   <%= link_to "Back to timers", timers_path %>
 
