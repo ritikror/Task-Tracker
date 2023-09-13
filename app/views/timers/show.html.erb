@@ -7,13 +7,12 @@
     <strong>Assigned By:</strong>
     <%= User.find(@timer.user_id).name %>
   </p>
-
-  <%= link_to "Start Timer"  %> 
-
 <div>
-
-  <%= link_to "Edit this timer", edit_timer_path(@timer) %> |
-  <%= link_to "Back to timers", timers_path %>
-
-  <%= button_to "Destroy this timer", @timer, method: :delete %>
+  <% if current_user.type == "Administrator"  %>
+      <%= link_to "Edit this timer", edit_timer_path(@timer) %> |
+      <%= link_to "Back to timers", timers_path %>
+      <%= button_to "Destroy this timer", @timer, method: :delete %>
+  <% else %>
+      <%= link_to "Start Timer"  %> 
+  <% end %>  
 </div>

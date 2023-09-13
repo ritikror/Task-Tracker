@@ -12,7 +12,7 @@
 
   <p>
     <strong>Assign_to:</strong>
-    <%= task.assign_to %>
+    <%= User.find(task.assign_to).name %>
   </p>
 
   <p>
