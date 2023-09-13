@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  root "users#new"
+  root "tasks#index"
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
 
   resources :timers
   get "start_timer", to: "timers#start_timer"
@@ -7,5 +10,6 @@ Rails.application.routes.draw do
   resource :users
   get "signin", to: "users#signin"
   post "login", to: "users#login"
+  
   
 end

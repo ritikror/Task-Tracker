@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   # skip_before_action :authenticate_request, only: [:create, :login]
-  before_action :check_administrator, only: :destroy
+  before_action :authenticate_user!
+  # before_action :check_administrator, only: :destroy
 
   def show
     render json: @current_user
@@ -43,16 +44,17 @@ class UsersController < ApplicationController
 
   def signin; end
   
-  def login
-    user = User.find_by_email(params[:email])
-    if user&.authenticate(params[:password])
-      token = jwt_encode(user_id: user.id)
-      redirect_to tasks_path
-      # render json: { message: "Logged In Successfully..", token: token }
-    else
-      render json: { error: "Please Check your Email And Password....."}  
-    end
-  end
+  # def login
+  #   user = User.find_by_email(params[:email])
+  #   if user&.authenticate(params[:password])
+  #     token = jwt_encode(user_id: user.id)
+  #     # redirect_to tasks_path
+  #     render json: { message: "Logged In Successfully..", token: token }
+  #   else
+  #     render json: { error: "Please Check your Email And Password....."}  
+  #   end
+  # end
+
 
   private
   def user_params

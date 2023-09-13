@@ -3,14 +3,14 @@ class TasksController < ApplicationController
   before_action :check_administrator, except: [:index, :show]
 
   def index
-    # if @current_user.type == "Administrator"
-      # tasks = @current_user.tasks
+    if current_user.type == "Administrator"
+      tasks = current_user.tasks
       @tasks = Task.all
       # render json: tasks
-    # else
-    #   assign_tasks = Task.where(assign_to:@current_user.id)
-    #   render json: assign_tasks
-    # end
+    else
+      @tasks = Task.where(assign_to:current_user.id)
+      # render json: assign_tasks
+    end
   end
 
   def show
@@ -20,8 +20,8 @@ class TasksController < ApplicationController
   def create
     task = @current_user.tasks.new(task_params)
     if task.save
-      render json: "Task successfully created"  
-      TaskMailer.with(task: task).task_assigned.deliver_later    
+      # render json: "Task successfully created"  
+      TaskMailer.with(task: task).task_assigned.deliver_now   
     else
       render json: {message: "something went wrong!!", errors: @current_user.errors.full_messages }
     end
@@ -49,12 +49,14 @@ class TasksController < ApplicationController
   end
 
   def set_params
-    @task = Task.find(params[:id])
-    # if @current_user.type == "Administrator"
-    #   @task = @current_user.tasks.find(params[:id])
-    # else
-    #   assign_task = Task.where(assign_to:@current_user.id)
-    #   @task = assign_task.find(params[:id])
-    # end
+    # @task = Task.find(params[:id])
+    if @current_user.type == "Administrator"
+      @task = @current_user.tasks.find(params[:id])
+      @timer = @task.timer
+    else
+      assign_task = Task.where(assign_to:@current_user.id)
+      @task = assign_task.find(params[:id])
+      @timer = @task.timer
+    end
   end
 end

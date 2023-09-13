@@ -5,6 +5,8 @@ ruby "3.0.0"
 
 gem 'mail'
 
+gem 'devise'
+
 gem 'byebug'
 
 gem "active_model_serializers"

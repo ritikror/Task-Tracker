@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+  <p>
+      <strong>Timer:</strong>
+      <%= @timer.time_in_minute %>
+    </p>
+    <p>
+    <strong>Assigned By:</strong>
+    <%= User.find(@timer.user_id).name %>
+  </p>
+
+<div>
+  <%= link_to "Edit this timer", edit_timer_path(@timer) %> |
+  <%= link_to "Back to timers", timers_path %>
+
+  <%= button_to "Destroy this timer", @timer, method: :delete %>
+</div>

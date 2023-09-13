@@ -9,7 +9,7 @@ class TimersController < ApplicationController
   end
 
   def show
-    render json: @timer
+    # render json: @timer
   end
 
   # def create

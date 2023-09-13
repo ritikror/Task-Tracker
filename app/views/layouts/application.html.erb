@@ -7,13 +7,36 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <style>
+      ul#menu li {
+        display:inline;
+        /* margin: 50px; */
+      }
+    </style>
   </head>
   <body>
-    <div style="background-color: #007BFF; padding: 10px;">
-      <p style="color: #fff; font-size: 14px; margin: 0;">Task Tracker</p>
+  <div style="background-color: #007BFF; padding: 2px;">
+  <ul id="menu">
+    <li style="font-size: 40px;"><strong> Task Tracker</strong></li>
+ 
+  <li style=" margin-left: 35%;"><% if user_signed_in? %>
+        User: <strong> <%= current_user.name %>. </strong>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <%= link_to 'Sign out', destroy_user_session_path %>
+    <% else %>
+        <%= link_to 'Register', new_user_registration_path %> or <%= link_to 'Sign in', new_user_session_path %>
+    <% end %> </li>
+     </ul>
     </div>
+    <%
+=begin%>
+ <%= link_to "Sign out", destroy_user_session_path, :method => :delete %> 
+<%
+=end%>
+    <% if notice %> <p class="alert alert-success"><%= notice %></p> <% end %>
+    <% if alert %> <p class="alert alert-danger"><%= alert %></p> <% end %>
     <%= yield %>
-    <br>
+    <br> <br>
     <div style="background-color: #007BFF; padding: 10px; text-align: center;">
       <p style="color: #fff; font-size: 14px; margin: 0;">&copy; 2023 Task Tracker</p>
     </div>

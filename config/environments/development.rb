@@ -56,6 +56,9 @@ Rails.application.configure do
     :enable_starttls_auto => true
 }
 
+config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
   # Uncomment if you wish to allow Action Cable access from any origin.

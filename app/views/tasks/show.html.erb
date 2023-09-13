@@ -1,6 +1,22 @@
 <p style="color: green"><%= notice %></p>
+  <p>
+      <strong>Task:</strong>
+      <%= link_to @task.title, @task %>
+    </p>
+    <p>
+    <strong>Description:</strong>
+    <%= @task.description %>
+  </p>
 
-<%= render @task %>
+  <p>
+    <strong>Assign_to:</strong>
+    <%= @task.assign_to %>
+  </p>
+
+  <p>
+    <strong>Status:</strong>
+    <%= @task.status %>
+  </p> 
 
 <div>
   <%= link_to "Edit this task", edit_task_path(@task) %> |

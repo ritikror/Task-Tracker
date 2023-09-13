@@ -1,19 +1,27 @@
 class ApplicationController < ActionController::Base
   include JsonWebToken
 #   before_action :authenticate_request
-	skip_forgery_protection
+  protect_from_forgery prepend: true
+  before_action :authenticate_user!
+  before_action :current_user, except: [:sign_in, :sign_up]
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :type , :password])
+  end
 
-  private
-	def authenticate_request
-		begin
-			header = request.headers[ 'Authorization' ]
-			header = header.split(" ").last if header
-			decoded = jwt_decode(header)
-			@current_user = User.find(decoded[:user_id])
-		rescue JWT::DecodeError	=> e
-			render json: { error: 'Invalid token' }, status: :unprocessable_entity
-		end
-	end
+
+#   private
+# 	def authenticate_request
+# 		begin
+# 			header = request.headers[ 'Authorization' ]
+# 			header = header.split(" ").last if header
+# 			decoded = jwt_decode(header)
+# 			@current_user = User.find(decoded[:user_id])
+# 		rescue JWT::DecodeError	=> e
+# 			render json: { error: 'Invalid token' }, status: :unprocessable_entity
+# 		end
+# 	end
 
   	def check_administrator
 		return render json: { message: "You don't have access to perform this action. Please contact to your administrator" } unless @current_user.type == 'Administrator'
