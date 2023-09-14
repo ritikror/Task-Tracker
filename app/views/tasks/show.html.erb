@@ -1,16 +1,21 @@
 <p style="color: green"><%= notice %></p>
+ <center>
+  <u><h3> Task Details </h3></u>
+ </center> <br>
+
   <p>
-      <strong>Task:</strong>
-      <%= link_to @task.title, @task %>
-    </p>
-    <p>
+    <strong>Task:</strong>
+    <%= link_to @task.title, @task %>
+  </p>
+
+  <p>
     <strong>Description:</strong>
     <%= @task.description %>
   </p>
 
   <p>
     <strong>Assign_to:</strong>
-    <%= @task.assign_to %>
+    <%= User.find(@task.assign_to).name  %>
   </p>
 
   <p>
@@ -18,9 +23,21 @@
     <%= @task.status %>
   </p> 
 
-<div>
-  <%= link_to "Edit this task", edit_task_path(@task) %> |
-  <%= link_to "Back to tasks", tasks_path %>
+  <p>
+    <strong>Timer:</strong>
+    <% if @task.timer.nil?  %>
+        <strong>NA</strong>
+    <% else  %> 
+      <%= link_to @task.timer.time_in_minute, timer_path(@task.timer) %>
+    <% end %>
+  </p>
 
-  <%= button_to "Destroy this task", @task, method: :delete %>
+<div>
+  <% if current_user.type == "Administrator"  %>
+    <%= link_to "Edit this task", edit_task_path(@task) %> |
+    <%= link_to "Back to tasks", tasks_path %>
+    <%= button_to "Destroy this task", @task, method: :delete %>   
+  <% else %>
+    <%= link_to "Back to tasks", tasks_path %>  
+  <% end %>  
 </div>

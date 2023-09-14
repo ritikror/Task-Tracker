@@ -25,7 +25,7 @@ class TimersController < ApplicationController
     if @timer.update(timer_params)
       render json: {message: "Timer successfully updated", Timer: @timer}
     else
-      render json: {message: "something went wrong!!", errors: @current_user.errors.full_messages }
+      render json: {message: "something went wrong!!", errors: current_user.errors.full_messages }
     end
   end
 
@@ -38,7 +38,7 @@ class TimersController < ApplicationController
 
   def start_timer
     task = Task.find(@timer.task_id)
-    if task.assign_to == @current_user.id
+    if task.assign_to == current_user.id
       if task.status != "complete"
         t = @timer.time_in_minute 
         t.times do | i | 
@@ -47,7 +47,7 @@ class TimersController < ApplicationController
         end 
         task = task.update(status:"complete")
         if task
-          render json: {message: "Task time is completed"}
+          # render json: {message: "Task time is completed"}
           TimerMailer.with(timer: @timer).timer_complete.deliver_now 
         else
           render json: "something went wrong!!!"
