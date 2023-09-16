@@ -1,1 +1,34 @@
-<h1>Hii</h1>
+<% if @timer.task.status == "Pending"  %>
+  <%= start_timer_function() %>
+  <div style="text-align: center;" class="blurred-background task-card">
+    <h1>For Task: <%= @timer.task.title %>, Timer is running...</h1>
+    <p id="timer">Timer: <span id="countdown"></span></p>
+  </div>
+
+  <script>
+    // JavaScript to handle the countdown timer
+    var timeLeft = <%= @timer.time_in_minute * 60 %>; // Convert minutes to seconds
+    var countdownElement = document.getElementById('countdown');
+    
+    function updateTimer() {
+      var minutes = Math.floor(timeLeft / 60);
+      var seconds = timeLeft % 60;
+      
+      countdownElement.textContent = minutes + 'm ' + seconds + 's';
+      
+      if (timeLeft === 0) {
+        clearInterval(timerInterval);
+        countdownElement.textContent = 'Timer Completed';
+      }
+      
+      timeLeft--;
+    }
+    
+    var timerInterval = setInterval(updateTimer, 1000);
+  </script>
+<% else %>
+  <div class="blurred-background task-card">
+    <h1>For Task: <%= @timer.task.title %>, Timer is completed!!</h1>
+  </div>
+<% end %>
+

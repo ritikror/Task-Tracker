@@ -1,21 +1,11 @@
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-  </head>
-  <body>
-    <p>Hii <%= @user.name %></P>
-
-    <h4>Welcome to Task Tracker web-app</h4>
-
-    <p>
-      You have successfully signed up to  Task Tracker.</p>
-
-    <p>
-      To login to the site, just follow this link: http://127.0.0.1:3000/user/login.
-    </p><br>
-
-    <p>Thanks for joining and have a great day!</p>
-    <p>The Task Tracker Team</p>
-
-  </body>
-</html>
+<h2>Welcome to Task Tracker</h2>
+<p>Dear <%= @user.name %>,</p>
+<p>Thank you for joining Task Tracker! We're excited to have you as a member of our community.</p>
+<p>With Task Tracker, you can easily manage your tasks, set priorities, and stay organized.</p>
+<p><strong>Your login details:</strong></p>
+<p><strong>Email:</strong> <%= @user.email %></p>
+<p><strong>Password:</strong> <%= @user.password %></p>
+<p>Feel free to explore our site and get started with managing your tasks.</p>
+<p>If you have any questions or need assistance, please don't hesitate to contact our support team at ritikdhoteecafe@gmail.com .</p>
+<p>Thank you again for choosing Task Tracker!</p>
+                

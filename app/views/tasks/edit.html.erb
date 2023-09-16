@@ -1,10 +1,12 @@
-<h1>Editing task</h1>
-
+<center><h1>Editing task</h1></center>
+<div class="blurred-background task-card">
 <%= render "form", task: @task %>
 
-<br>
-
 <div>
-  <%= link_to "Show this task", @task %> |
-  <%= link_to "Back to tasks", tasks_path %>
+<center>
+ <div class="blurred-background task-card"> <%= link_to "Show this task", @task %> </div>
+ <div class="blurred-background task-card"> <%= link_to "Back to tasks", tasks_path %> </div>
+ </center>
+</div>
+
 </div>

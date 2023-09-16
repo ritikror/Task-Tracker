@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   resources :timers
   get "start_timer/:id", to: "timers#start_timer", as: 'start_timer'
 
-  resources :tasks
+  resources :tasks do 
+    get '/page/:page', action: :index, on: :collection
+  end
   
   resource :users
   get "signin", to: "users#signin"

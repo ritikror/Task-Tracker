@@ -1,0 +1,20 @@
+current directory: D:/shriffle_project/Task-Tracker/vendor/bundle/ruby/3.2.0/gems/debug-1.8.0/ext/debug
+C:/Ruby32-x64/bin/ruby.exe extconf.rb
+creating Makefile
+
+current directory: D:/shriffle_project/Task-Tracker/vendor/bundle/ruby/3.2.0/gems/debug-1.8.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20230916-3336-j60d7s sitelibdir\=./.gem.20230916-3336-j60d7s clean
+
+current directory: D:/shriffle_project/Task-Tracker/vendor/bundle/ruby/3.2.0/gems/debug-1.8.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20230916-3336-j60d7s sitelibdir\=./.gem.20230916-3336-j60d7s
+generating debug-x64-mingw-ucrt.def
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.so
+
+current directory: D:/shriffle_project/Task-Tracker/vendor/bundle/ruby/3.2.0/gems/debug-1.8.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20230916-3336-j60d7s sitelibdir\=./.gem.20230916-3336-j60d7s install
+/usr/bin/install -c -m 0755 debug.so ./.gem.20230916-3336-j60d7s/debug
+
+current directory: D:/shriffle_project/Task-Tracker/vendor/bundle/ruby/3.2.0/gems/debug-1.8.0/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20230916-3336-j60d7s sitelibdir\=./.gem.20230916-3336-j60d7s clean

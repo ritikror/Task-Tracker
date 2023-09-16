@@ -1,15 +1,203 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+.custom-link {
+  text-decoration: none; /* Remove underline */
+  color: black; /* Change link color to your desired color */
+}
+
+ul#menu li {
+  display:inline;
+  /* margin: 50px; */
+}
+
+/* Task Css */
+/* Style the task card container with a blurred background */
+.blurred-background {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Create a pseudo-element with a blurred background */
+.blurred-background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('your-image.jpg'); /* Replace with the URL of your background image */
+  filter: blur(10px); /* Adjust the blur radius as needed */
+  z-index: -1;
+}
+
+/* Style the card content (text and other elements) */
+.task-card {
+  background-color: rgba(0, 0, 0, 0.1); /* Adjust the alpha (fourth value) as needed */
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1; /* Ensure card content appears above the blurred background */
+}
+
+
+/* Style the task title */
+.task-title {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+/* Style the task description */
+.task-description {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+/* Style the task assignee and status */
+.task-assignee, .task-status {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+/* Style the task timer */
+.task-timer {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+/* Style the "New task" link for Administrators */
+#new-task-link {
+  display: <%= current_user.type == "Administrator" ? "block" : "none" %>;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+/* Remove underline and change color on links */
+a {
+  text-decoration: none;
+  color: #bbf7fc;
+}
+
+a:hover {
+  color: #f8dddd;
+}
+
+
+
+
+/* Create a black background */
+body {
+  background-color: #000;
+  margin: 0;
+  color: #fff; /* Set font color to white */
+  position: relative; 
+  height: 100%; 
+}
+
+/* Create a star animation */
+@keyframes twinkle {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+/* Style the stars */
+.star {
+  position: absolute;
+  background: transparent;
+  width: 2px;
+  height: 2px;
+  animation: twinkle 5s infinite;
+}
+
+/* Generate random positions for stars */
+.star::before {
+  content: ' ';
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0.6;
+  top: -100%;
+  left: -100%;
+  animation: twinkle 5s infinite;
+  animation-delay: 0s, 1s;
+}
+
+/* Hide the default scrollbar */
+::-webkit-scrollbar {
+  width: 0.2em;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 0.5em;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Input field CSS */
+.large-input-description {
+  width: 50%; /* Adjust the width as needed */
+  height: 90px; /* Adjust the height as needed */
+  font-size: 16px; /* Adjust the font size as needed */
+  /* Add any other styles you want */
+}
+
+
+
+/* Apply styles to the form group */
+.form-group {
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Center vertically */
+  margin-bottom: 10px; /* Add spacing between pairs */
+}
+
+/* Style the form label (title) */
+.form-label {
+  width: 120px; /* Adjust the width as needed */
+  margin-right: 10px; /* Add spacing between label and input */
+  text-align: right; /* Align the text to the right */
+  font-weight: bold; /* Apply bold style to label */
+}
+
+/* Style the form input */
+.form-input {
+  flex: 1; /* Expand the input to fill remaining space */
+  height: 50px; /* Adjust the height as needed */
+  border: 1px solid #f5f5f5;
+  padding: 5px;
+  background-color: #000000;
+  color: #bbf7fc;
+  /* Add any other input styles you want */
+}
+
+.form-input:hover {
+  border-color: #007bff; /* Change border color on hover */
+}
+
+/* Style input fields on focus */
+.form-input:focus {
+  border-color: #00ccff; /* Change border color on focus */
+  outline: none; /* Remove default focus outline (optional) */
+}

@@ -4,44 +4,45 @@ class TasksController < ApplicationController
 
   def index
     if current_user.type == "Administrator"
-      tasks = current_user.tasks
-      @tasks = Task.all
-      # render json: tasks
+      @tasks = current_user.tasks.page params[:page]
     else
-      @tasks = Task.where(assign_to:current_user.id)
-      # render json: assign_tasks
+      @tasks = Task.where(assign_to:current_user.id).page params[:page]
     end
   end
 
   def show
-    # render json: @task
   end
 
   def new
+    @task = current_user.tasks.new
   end
 
   def create
-    task = current_user.tasks.new(task_params)
-    if task.save
-      # render json: "Task successfully created"  
-      TaskMailer.with(task: task).task_assigned.deliver_now   
+    @task = current_user.tasks.new(task_params)
+    if @task.save
+      redirect_to @task, notice: 'Task was successfully created.'
+      TaskMailer.with(task: @task).task_assigned.deliver_now   
     else
-      render json: {message: "something went wrong!!", errors: current_user.errors.full_messages }
+      redirect_to new_task_path
     end
+  end
+
+  def edit
   end
 
   def update
     if @task.update(task_params)
-      render json: "Task successfully updated"      
+      redirect_to @task, notice: 'Task was successfully updated.'   
     else
-      render json: {message: "something went wrong!!", errors: current_user.errors.full_messages }
+      render :edit
     end
   end
 
   def destroy
-    if @task 
-      @task.destroy
-      render json: "Task successfully deleted!!"      
+    if @task.destroy
+      redirect_to tasks_path, notice: 'Task was successfully deleted.'
+    else
+      redirect_to @task,  notice: 'Something Went Wrong!!!!.'
     end
   end
   

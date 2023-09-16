@@ -1,8 +1,8 @@
-<p style="color: green"><%= notice %></p>
  <center>
   <u><h3> Timer with task: <%= @timer.task.title %></h3></u>
  </center> <br>
 
+<div class="blurred-background task-card">
   <p>
     <strong>Timer (Minutes):</strong>
     <%= @timer.time_in_minute %>
@@ -22,17 +22,17 @@
     <strong>Assigned By:</strong>
     <%= User.find(@timer.user_id).name %>
   </p>
-  
-<div>
-  <% if current_user.type == "Administrator"  %>
-      <%= link_to "Edit this timer", edit_timer_path(@timer) %> |
-      <%= link_to "Back to timers", timers_path %>
-      <%= button_to "Destroy this timer", @timer, method: :delete %>
-  <% else %>
-    <% if current_user.type == "Workie"  %>
-
-      <%= link_to "Start Timer", start_timer_path %> | 
-      <%= link_to "Back to tasks", task_url %>
-    <% end %>
-  <% end %>  
+    
+  <div><center>
+    <% if current_user.type == "Administrator"  %>
+        <div class="blurred-background task-card"><%= link_to "Edit this timer", edit_timer_path(@timer) %></div> 
+        <div class="blurred-background task-card"><%= link_to "Back to task", task_url %></div>
+        <div class="blurred-background task-card"><%= link_to "Destroy this timer", @timer, method: :delete %></div>
+    <% else %>
+      <% if current_user.type == "Workie"  %>
+        <div class="blurred-background task-card"><%= link_to "Start Timer", start_timer_path %></div>  
+        <div class="blurred-background task-card"><%= link_to "Back to tasks", task_url %></div>
+      <% end %>
+    <% end %>  
+  </center></div>
 </div>

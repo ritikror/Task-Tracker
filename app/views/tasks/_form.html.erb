@@ -1,39 +1,51 @@
-<%= form_with(model: task) do |form| %>
-
- <% if task.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+<%= form_with(model: task, local: true) do |form| %>
+  <% if task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(task.errors.count, 'error') %> prohibited this task from being saved:</h2>
 
       <ul>
-        <% task.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% task.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
-  <% end %> 
+  <% end %>
 
-
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+  <div class="form-group blurred-background task-card">
+    <%= form.label :title, class: 'form-label' %>
+    <%= form.text_field :title, class: 'form-input' %>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
+  <div class="form-group blurred-background task-card">
+    <%= form.label :description, class: 'form-label' %>
+    <%= form.text_area :description, class: 'form-input' %>
   </div>
 
-  <div>
-    <%= form.label :assign_to, style: "display: block" %>
-    <%= form.number_field :assign_to %>
+  <div class="form-group blurred-background task-card">
+    <%= form.label :assign_to, class: 'form-label' %>
+    <%= form.number_field :assign_to, class: 'form-input' %>
   </div>
 
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.text_field :status %>
+  <div class="form-group blurred-background task-card">
+    <%= form.label :status, class: 'form-label' %>
+    <%= form.text_field :status, class: 'form-input' %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <%= form.fields_for :timer_attributes do |f| %>
+    <div class="form-group blurred-background task-card">
+      <%= f.label 'Time in Minutes', class: 'form-label' %>
+      <%= f.number_field :time_in_minute, class: 'form-input' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.hidden_field :user_id, value: current_user.id %>
+    </div>
+  <% end %>
+<center>
+  <div class="form-group blurred-background task-card">
+    <%= form.submit 'Submit', class: 'form-input' %>
   </div>
 <% end %>
+
+<div class="blurred-background task-card"><%= link_to 'Back to Tasks', tasks_path, class: 'btn btn-secondary' %> </div>
+</center>
